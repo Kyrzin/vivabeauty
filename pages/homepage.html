@@ -479,41 +479,6 @@
         });
     </script>
 <script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
-
-    <!-- Chatbase конфигурация -->
-<script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="SYw_8KSPuNx_zIMW-fDNG";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>
-<!-- SDK -->
-<script
-  src="https://www.chatbase.co/embed.min.js"
-  id="SYw_8KSPuNx_zIMW-fDNG"
-  defer
-  onload="initChatbaseForms()"></script>
-<script>
-function initChatbaseForms () {
-  if (!window.chatbase) { console.error("Chatbase SDK не инициализировался"); return; }
-
-  window.chatbase.registerFormSchema({
-    kontaktwunsch: async () => ({
-      fields: [
-        { name:"name",  label:"Name",  type:"text",
-          validation:{ required:{ value:true, message:"Wie ist Ihre Name" } } },
-        { name:"email", label:"E‑mail", type:"email",
-          validation:{ required:{ value:true, message:"Wie ist Ihre E-Mail-Adresse?" } } },
-        { name:"telefon",  label:"Telefon",  type:"number",
-          validation:{ required:{ value:true, message:"Wie ist Ihre Telefonnummer?" } } },
-        { name:"anliegen",  label:"Anliegen",  type:"text",
-          validation:{ required:{ value:true, message:"Um was geht es?" } } },
-        
-      ],
-      submitButtonText:"Absenden",
-      successMessage:"Vielen Dank! Wir werden uns in Kürze bei Ihnen melden.",
-      errorMessage:"Fehler beim Senden. Bitte versuchen Sie es später erneut."
-    })
-  });
-  }
-</script>
     
 </body>
 </html>
