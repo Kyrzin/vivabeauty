@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "bookNow": "Book Now"
+  },
+  "homepage": {
+    "heroHeading": "Transform Your Beauty",
+    "heroDescription": "Experience luxury beauty services in our premium salon. Professional hair styling, rejuvenating skincare, and relaxing spa treatments await you.",
+    "bookAppointment": "Book Appointment",
+    "viewServices": "View Services",
+    "servicesTitle": "Our Premium Services",
+    "servicesSubtitle": "Discover our comprehensive range of beauty and wellness services designed to enhance your natural beauty",
+    "hairTitle": "Hair Styling",
+    "hairDesc": "Professional cuts, coloring, and styling for all hair types",
+    "skincareTitle": "Skincare",
+    "skincareDesc": "Rejuvenating facials and advanced skincare treatments",
+    "nailTitle": "Nail Care",
+    "nailDesc": "Manicures, pedicures, and nail art by expert technicians",
+    "spaTitle": "Spa Treatments",
+    "spaDesc": "Relaxing massages and therapeutic wellness treatments"
+  },
+  "services": {
+    "pageTitle": "Our Premium Services",
+    "pageSubtitle": "Discover our comprehensive range of beauty and wellness services designed to enhance your natural beauty and well-being",
+    "searchPlaceholder": "Search services...",
+    "allServices": "All Services",
+    "categoryHair": "Hair",
+    "categorySkincare": "Skincare",
+    "categoryNail": "Nail Care",
+    "categorySpa": "Spa"
+  },
+  "gallery": {
+    "pageTitle": "Our Gallery",
+    "pageSubtitle": "Discover the artistry and excellence of our work through stunning transformations, beautiful facilities, and moments of beauty creation.",
+    "searchPlaceholder": "Search by service or stylist...",
+    "filterAll": "All Work",
+    "filterTransformations": "Before & After",
+    "filterHair": "Hair Styling",
+    "filterSkincare": "Skincare",
+    "filterNails": "Nail Art",
+    "filterFacility": "Our Salon"
+  },
+  "contact": {
+    "heroHeading": "Get In Touch",
+    "heroDescription": "We're here to help you look and feel your best. Contact us for appointments, questions, or to learn more about our services.",
+    "callNow": "Call Now",
+    "bookAppointment": "Book Appointment",
+    "phoneTitle": "Call Us",
+    "visitTitle": "Visit Us",
+    "emailTitle": "Email Us",
+    "findLocation": "Find Our Location",
+    "getDirections": "Get Directions",
+    "parkingInfo": "Parking Information",
+    "businessHours": "Business Hours"
+  },
+  "loader": {
+    "welcome": "Welcome to Beauty Salon",
+    "redirect": "Redirecting to homepage..."
+  }
+}

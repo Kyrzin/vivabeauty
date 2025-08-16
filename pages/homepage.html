@@ -23,15 +23,20 @@
 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="homepage.html" class="text-text-primary hover:text-primary transition-hover font-medium">Home</a>
-                    <a href="services_catalog.html" class="text-text-secondary hover:text-primary transition-hover">Services</a>
-                    <a href="photo_gallery.html" class="text-text-secondary hover:text-primary transition-hover">Gallery</a>
-                    <a href="contact_location.html" class="text-text-secondary hover:text-primary transition-hover">Contact</a>
+                    <a href="homepage.html" class="text-text-primary hover:text-primary transition-hover font-medium" data-i18n="nav.home">Home</a>
+                    <a href="services_catalog.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.services">Services</a>
+                    <a href="photo_gallery.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.gallery">Gallery</a>
+                    <a href="contact_location.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.contact">Contact</a>
                 </div>
 
                 <!-- Book Now Button & Mobile Menu -->
                 <div class="flex items-center space-x-4">
-                    <button class="btn-primary hidden sm:block">Book Now</button>
+                    <select id="language-select" class="p-2 border rounded">
+                        <option value="en">EN</option>
+                        <option value="ru">RU</option>
+                        <option value="de">DE</option>
+                    </select>
+                    <button class="btn-primary hidden sm:block" data-i18n="nav.bookNow">Book Now</button>
                     <button id="mobile-menu-btn" class="md:hidden p-2 text-text-primary hover:text-primary transition-hover">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -43,11 +48,11 @@
             <!-- Mobile Navigation Menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-secondary-200">
                 <div class="flex flex-col space-y-4 pt-4">
-                    <a href="homepage.html" class="text-text-primary hover:text-primary transition-hover font-medium">Home</a>
-                    <a href="services_catalog.html" class="text-text-secondary hover:text-primary transition-hover">Services</a>
-                    <a href="photo_gallery.html" class="text-text-secondary hover:text-primary transition-hover">Gallery</a>
-                    <a href="contact_location.html" class="text-text-secondary hover:text-primary transition-hover">Contact</a>
-                    <button class="btn-primary w-full mt-4">Book Now</button>
+                    <a href="homepage.html" class="text-text-primary hover:text-primary transition-hover font-medium" data-i18n="nav.home">Home</a>
+                    <a href="services_catalog.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.services">Services</a>
+                    <a href="photo_gallery.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.gallery">Gallery</a>
+                    <a href="contact_location.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.contact">Contact</a>
+                    <button class="btn-primary w-full mt-4" data-i18n="nav.bookNow">Book Now</button>
                 </div>
             </div>
         </nav>
@@ -61,15 +66,15 @@
         </div>
         
         <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-            <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6 animate-fade-in">
+            <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6 animate-fade-in" data-i18n="homepage.heroHeading">
                 Transform Your Beauty
             </h1>
-            <p class="text-lg md:text-xl mb-8 opacity-90 animate-slide-up">
+            <p class="text-lg md:text-xl mb-8 opacity-90 animate-slide-up" data-i18n="homepage.heroDescription">
                 Experience luxury beauty services in our premium salon. Professional hair styling, rejuvenating skincare, and relaxing spa treatments await you.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-                <button class="btn-primary text-lg px-8 py-4">Book Appointment</button>
-                <button class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-medium hover:bg-white hover:text-text-primary transition-hover">
+                <button class="btn-primary text-lg px-8 py-4" data-i18n="homepage.bookAppointment">Book Appointment</button>
+                <button class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-medium hover:bg-white hover:text-text-primary transition-hover" data-i18n="homepage.viewServices">
                     View Services
                 </button>
             </div>
@@ -80,8 +85,8 @@
     <section class="py-16 px-4 bg-surface">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-text-primary mb-4">Our Premium Services</h2>
-                <p class="text-text-secondary text-lg max-w-2xl mx-auto">Discover our comprehensive range of beauty and wellness services designed to enhance your natural beauty</p>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-text-primary mb-4" data-i18n="homepage.servicesTitle">Our Premium Services</h2>
+                <p class="text-text-secondary text-lg max-w-2xl mx-auto" data-i18n="homepage.servicesSubtitle">Discover our comprehensive range of beauty and wellness services designed to enhance your natural beauty</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -90,8 +95,8 @@
                     <div class="overflow-hidden rounded-lg mb-4">
                         <img src="https://images.pixabay.com/photo/2016/03/27/07/32/woman-1282314_1280.jpg" alt="Professional hair styling services" class="w-full h-48 object-cover group-hover:scale-105 transition-smooth" onerror="this.src='https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
                     </div>
-                    <h3 class="text-xl font-serif font-semibold mb-2 text-text-primary">Hair Styling</h3>
-                    <p class="text-text-secondary mb-4">Professional cuts, coloring, and styling for all hair types</p>
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-text-primary" data-i18n="homepage.hairTitle">Hair Styling</h3>
+                    <p class="text-text-secondary mb-4" data-i18n="homepage.hairDesc">Professional cuts, coloring, and styling for all hair types</p>
                     <a href="services_catalog.html" class="text-primary font-medium hover:text-primary-600 transition-hover">Learn More →</a>
                 </div>
 
@@ -100,8 +105,8 @@
                     <div class="overflow-hidden rounded-lg mb-4">
                         <img src="https://images.pexels.com/photos/3985360/pexels-photo-3985360.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Rejuvenating facial treatments" class="w-full h-48 object-cover group-hover:scale-105 transition-smooth" onerror="this.src='https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
                     </div>
-                    <h3 class="text-xl font-serif font-semibold mb-2 text-text-primary">Skincare</h3>
-                    <p class="text-text-secondary mb-4">Rejuvenating facials and advanced skincare treatments</p>
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-text-primary" data-i18n="homepage.skincareTitle">Skincare</h3>
+                    <p class="text-text-secondary mb-4" data-i18n="homepage.skincareDesc">Rejuvenating facials and advanced skincare treatments</p>
                     <a href="services_catalog.html" class="text-primary font-medium hover:text-primary-600 transition-hover">Learn More →</a>
                 </div>
 
@@ -110,8 +115,8 @@
                     <div class="overflow-hidden rounded-lg mb-4">
                         <img src="https://images.pixabay.com/photo/2017/07/02/19/24/dumbbells-2465478_1280.jpg" alt="Professional nail care and manicure" class="w-full h-48 object-cover group-hover:scale-105 transition-smooth" onerror="this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
                     </div>
-                    <h3 class="text-xl font-serif font-semibold mb-2 text-text-primary">Nail Care</h3>
-                    <p class="text-text-secondary mb-4">Manicures, pedicures, and nail art by expert technicians</p>
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-text-primary" data-i18n="homepage.nailTitle">Nail Care</h3>
+                    <p class="text-text-secondary mb-4" data-i18n="homepage.nailDesc">Manicures, pedicures, and nail art by expert technicians</p>
                     <a href="services_catalog.html" class="text-primary font-medium hover:text-primary-600 transition-hover">Learn More →</a>
                 </div>
 
@@ -120,8 +125,8 @@
                     <div class="overflow-hidden rounded-lg mb-4">
                         <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Relaxing spa and massage treatments" class="w-full h-48 object-cover group-hover:scale-105 transition-smooth" onerror="this.src='https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
                     </div>
-                    <h3 class="text-xl font-serif font-semibold mb-2 text-text-primary">Spa Treatments</h3>
-                    <p class="text-text-secondary mb-4">Relaxing massages and therapeutic wellness treatments</p>
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-text-primary" data-i18n="homepage.spaTitle">Spa Treatments</h3>
+                    <p class="text-text-secondary mb-4" data-i18n="homepage.spaDesc">Relaxing massages and therapeutic wellness treatments</p>
                     <a href="services_catalog.html" class="text-primary font-medium hover:text-primary-600 transition-hover">Learn More →</a>
                 </div>
             </div>
@@ -478,6 +483,7 @@
             }
         });
     </script>
+<script src="../public/lang-switcher.js"></script>
 <script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
 
 
