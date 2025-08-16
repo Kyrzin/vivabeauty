@@ -23,15 +23,20 @@
 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-hover">Home</a>
-                    <a href="services_catalog.html" class="text-text-secondary hover:text-primary transition-hover">Services</a>
-                    <a href="photo_gallery.html" class="text-text-secondary hover:text-primary transition-hover">Gallery</a>
-                    <a href="contact_location.html" class="text-text-primary hover:text-primary transition-hover font-medium">Contact</a>
+                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.home">Home</a>
+                    <a href="services_catalog.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.services">Services</a>
+                    <a href="photo_gallery.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.gallery">Gallery</a>
+                    <a href="contact_location.html" class="text-text-primary hover:text-primary transition-hover font-medium" data-i18n="nav.contact">Contact</a>
                 </div>
 
                 <!-- Book Now Button & Mobile Menu -->
                 <div class="flex items-center space-x-4">
-                    <button class="btn-primary hidden sm:block">Book Now</button>
+                    <select id="language-select" class="p-2 border rounded">
+                        <option value="en">EN</option>
+                        <option value="ru">RU</option>
+                        <option value="de">DE</option>
+                    </select>
+                    <button class="btn-primary hidden sm:block" data-i18n="nav.bookNow">Book Now</button>
                     <button id="mobile-menu-btn" class="md:hidden p-2 text-text-primary hover:text-primary transition-hover">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -43,11 +48,11 @@
             <!-- Mobile Navigation Menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-secondary-200">
                 <div class="flex flex-col space-y-4 pt-4">
-                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-hover">Home</a>
-                    <a href="services_catalog.html" class="text-text-secondary hover:text-primary transition-hover">Services</a>
-                    <a href="photo_gallery.html" class="text-text-secondary hover:text-primary transition-hover">Gallery</a>
-                    <a href="contact_location.html" class="text-text-primary hover:text-primary transition-hover font-medium">Contact</a>
-                    <button class="btn-primary w-full mt-4">Book Now</button>
+                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.home">Home</a>
+                    <a href="services_catalog.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.services">Services</a>
+                    <a href="photo_gallery.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.gallery">Gallery</a>
+                    <a href="contact_location.html" class="text-text-primary hover:text-primary transition-hover font-medium" data-i18n="nav.contact">Contact</a>
+                    <button class="btn-primary w-full mt-4" data-i18n="nav.bookNow">Book Now</button>
                 </div>
             </div>
         </nav>
@@ -56,8 +61,8 @@
     <!-- Hero Section -->
     <section class="py-16 px-4 bg-gradient-to-br from-primary-50 to-secondary-100">
         <div class="container mx-auto max-w-6xl text-center">
-            <h1 class="text-4xl md:text-5xl font-serif font-bold text-text-primary mb-6">Get In Touch</h1>
-            <p class="text-lg text-text-secondary max-w-2xl mx-auto mb-8">
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-text-primary mb-6" data-i18n="contact.heroHeading">Get In Touch</h1>
+            <p class="text-lg text-text-secondary max-w-2xl mx-auto mb-8" data-i18n="contact.heroDescription">
                 We're here to help you look and feel your best. Contact us for appointments, questions, or to learn more about our services.
             </p>
             
@@ -67,9 +72,9 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                     </svg>
-                    <span>Call Now</span>
+                    <span data-i18n="contact.callNow">Call Now</span>
                 </a>
-                <button class="bg-transparent border-2 border-primary text-primary px-8 py-4 rounded-lg font-medium hover:bg-primary hover:text-white transition-hover">
+                <button class="bg-transparent border-2 border-primary text-primary px-8 py-4 rounded-lg font-medium hover:bg-primary hover:text-white transition-hover" data-i18n="contact.bookAppointment">
                     Book Appointment
                 </button>
             </div>
@@ -87,7 +92,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-serif font-semibold text-text-primary mb-2">Call Us</h3>
+                    <h3 class="text-xl font-serif font-semibold text-text-primary mb-2" data-i18n="contact.phoneTitle">Call Us</h3>
                     <p class="text-text-secondary mb-2">(555) 123-BEAUTY</p>
                     <p class="text-text-secondary text-sm">(555) 123-2328</p>
                 </div>
@@ -100,7 +105,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-serif font-semibold text-text-primary mb-2">Visit Us</h3>
+                    <h3 class="text-xl font-serif font-semibold text-text-primary mb-2" data-i18n="contact.visitTitle">Visit Us</h3>
                     <p class="text-text-secondary mb-2">123 Beauty Boulevard</p>
                     <p class="text-text-secondary text-sm">Downtown District, City 12345</p>
                 </div>
@@ -112,7 +117,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-serif font-semibold text-text-primary mb-2">Email Us</h3>
+                    <h3 class="text-xl font-serif font-semibold text-text-primary mb-2" data-i18n="contact.emailTitle">Email Us</h3>
                     <p class="text-text-secondary mb-2">hello@bellabeauty.com</p>
                     <p class="text-text-secondary text-sm">appointments@bellabeauty.com</p>
                 </div>
@@ -126,7 +131,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <!-- Interactive Map -->
                 <div>
-                    <h2 class="text-3xl font-serif font-bold text-text-primary mb-6">Find Our Location</h2>
+                    <h2 class="text-3xl font-serif font-bold text-text-primary mb-6" data-i18n="contact.findLocation">Find Our Location</h2>
                     <div class="bg-surface rounded-lg overflow-hidden shadow-warm mb-6">
                         <div class="relative h-80 bg-gradient-to-br from-primary-100 to-secondary-200">
                             <img src="https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" alt="Bella Beauty Salon Location Map" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
@@ -148,11 +153,11 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7"/>
                             </svg>
-                            <span>Get Directions</span>
+                            <span data-i18n="contact.getDirections">Get Directions</span>
                         </button>
                         
                         <div class="bg-surface rounded-lg p-4">
-                            <h4 class="font-semibold text-text-primary mb-2">Parking Information</h4>
+                            <h4 class="font-semibold text-text-primary mb-2" data-i18n="contact.parkingInfo">Parking Information</h4>
                             <ul class="text-text-secondary text-sm space-y-1">
                                 <li>• Free street parking available</li>
                                 <li>• Parking garage 2 blocks away</li>
@@ -165,7 +170,7 @@
 
                 <!-- Business Hours -->
                 <div>
-                    <h2 class="text-3xl font-serif font-bold text-text-primary mb-6">Business Hours</h2>
+                    <h2 class="text-3xl font-serif font-bold text-text-primary mb-6" data-i18n="contact.businessHours">Business Hours</h2>
                     
                     <div class="bg-surface rounded-lg p-6 shadow-warm mb-6">
                         <div class="space-y-4">
@@ -649,6 +654,7 @@
             });
         }
     </script>
+<script src="../public/lang-switcher.js"></script>
 <script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
 </body>
 </html>

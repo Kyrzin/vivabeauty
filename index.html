@@ -53,8 +53,8 @@
 <body>
     <div class="loader">
         <div class="spinner"></div>
-        <div class="welcome-text">Welcome to Beauty Salon</div>
-        <div class="redirect-text">Redirecting to homepage...</div>
+        <div class="welcome-text" data-i18n="loader.welcome">Welcome to Beauty Salon</div>
+        <div class="redirect-text" data-i18n="loader.redirect">Redirecting to homepage...</div>
     </div>
 
     <script>
@@ -63,6 +63,7 @@
             window.location.href = 'pages/homepage.html';
         }, 2000);
     </script>
+<script src="public/lang-switcher.js"></script>
 <script id="dhws-dataInjector" src="/public/dhws-data-injector.js"></script>
 
 
