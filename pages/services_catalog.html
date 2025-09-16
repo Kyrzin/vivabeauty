@@ -23,15 +23,20 @@
 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-hover">Home</a>
-                    <a href="services_catalog.html" class="text-text-primary hover:text-primary transition-hover font-medium">Services</a>
-                    <a href="photo_gallery.html" class="text-text-secondary hover:text-primary transition-hover">Gallery</a>
-                    <a href="contact_location.html" class="text-text-secondary hover:text-primary transition-hover">Contact</a>
+                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.home">Home</a>
+                    <a href="services_catalog.html" class="text-text-primary hover:text-primary transition-hover font-medium" data-i18n="nav.services">Services</a>
+                    <a href="photo_gallery.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.gallery">Gallery</a>
+                    <a href="contact_location.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.contact">Contact</a>
                 </div>
 
                 <!-- Book Now Button & Mobile Menu -->
                 <div class="flex items-center space-x-4">
-                    <button class="btn-primary hidden sm:block">Book Now</button>
+                    <select id="language-select" class="p-2 border rounded">
+                        <option value="en">EN</option>
+                        <option value="ru">RU</option>
+                        <option value="de">DE</option>
+                    </select>
+                    <button class="btn-primary hidden sm:block" data-i18n="nav.bookNow">Book Now</button>
                     <button id="mobile-menu-btn" class="md:hidden p-2 text-text-primary hover:text-primary transition-hover">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -43,11 +48,11 @@
             <!-- Mobile Navigation Menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-secondary-200">
                 <div class="flex flex-col space-y-4 pt-4">
-                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-hover">Home</a>
-                    <a href="services_catalog.html" class="text-text-primary hover:text-primary transition-hover font-medium">Services</a>
-                    <a href="photo_gallery.html" class="text-text-secondary hover:text-primary transition-hover">Gallery</a>
-                    <a href="contact_location.html" class="text-text-secondary hover:text-primary transition-hover">Contact</a>
-                    <button class="btn-primary w-full mt-4">Book Now</button>
+                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.home">Home</a>
+                    <a href="services_catalog.html" class="text-text-primary hover:text-primary transition-hover font-medium" data-i18n="nav.services">Services</a>
+                    <a href="photo_gallery.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.gallery">Gallery</a>
+                    <a href="contact_location.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.contact">Contact</a>
+                    <button class="btn-primary w-full mt-4" data-i18n="nav.bookNow">Book Now</button>
                 </div>
             </div>
         </nav>
@@ -57,11 +62,11 @@
     <section class="py-4 px-4 bg-surface border-b border-secondary-200">
         <div class="container mx-auto max-w-6xl">
             <nav class="flex items-center space-x-2 text-sm">
-                <a href="homepage.html" class="text-text-secondary hover:text-primary transition-hover">Home</a>
+                <a href="homepage.html" class="text-text-secondary hover:text-primary transition-hover" data-i18n="nav.home">Home</a>
                 <svg class="w-4 h-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
-                <span class="text-text-primary font-medium">Services</span>
+                <span class="text-text-primary font-medium" data-i18n="nav.services">Services</span>
             </nav>
         </div>
     </section>
@@ -69,8 +74,8 @@
     <!-- Page Header -->
     <section class="py-12 px-4 bg-gradient-to-r from-primary/10 to-accent/10">
         <div class="container mx-auto max-w-6xl text-center">
-            <h1 class="text-3xl md:text-4xl font-serif font-bold text-text-primary mb-4">Our Premium Services</h1>
-            <p class="text-text-secondary text-lg max-w-2xl mx-auto">Discover our comprehensive range of beauty and wellness services designed to enhance your natural beauty and well-being</p>
+            <h1 class="text-3xl md:text-4xl font-serif font-bold text-text-primary mb-4" data-i18n="services.pageTitle">Our Premium Services</h1>
+            <p class="text-text-secondary text-lg max-w-2xl mx-auto" data-i18n="services.pageSubtitle">Discover our comprehensive range of beauty and wellness services designed to enhance your natural beauty and well-being</p>
         </div>
     </section>
 
@@ -80,7 +85,7 @@
             <!-- Search Bar -->
             <div class="mb-6">
                 <div class="relative max-w-md mx-auto md:max-w-lg">
-                    <input type="text" id="service-search" placeholder="Search services..." class="input-field pl-10 pr-4" autocomplete="off" />
+                    <input type="text" id="service-search" placeholder="Search services..." class="input-field pl-10 pr-4" autocomplete="off" data-i18n-placeholder="services.searchPlaceholder" />
                     <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
@@ -90,19 +95,19 @@
             <!-- Category Filter Tabs -->
             <div class="flex items-center justify-between mb-6">
                 <div class="flex space-x-2 overflow-x-auto pb-2 md:pb-0" id="category-tabs">
-                    <button class="category-tab active px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-hover" data-category="all">
+                    <button class="category-tab active px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-hover" data-category="all" data-i18n="services.allServices">
                         All Services
                     </button>
-                    <button class="category-tab px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-hover" data-category="hair">
+                    <button class="category-tab px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-hover" data-category="hair" data-i18n="services.categoryHair">
                         Hair
                     </button>
-                    <button class="category-tab px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-hover" data-category="skincare">
+                    <button class="category-tab px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-hover" data-category="skincare" data-i18n="services.categorySkincare">
                         Skincare
                     </button>
-                    <button class="category-tab px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-hover" data-category="nails">
+                    <button class="category-tab px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-hover" data-category="nails" data-i18n="services.categoryNail">
                         Nails
                     </button>
-                    <button class="category-tab px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-hover" data-category="spa">
+                    <button class="category-tab px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-hover" data-category="spa" data-i18n="services.categorySpa">
                         Spa
                     </button>
                 </div>
@@ -764,6 +769,7 @@
             }
         });
     </script>
+<script src="../public/lang-switcher.js"></script>
 <script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
 </body>
 </html>

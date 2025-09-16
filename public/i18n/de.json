@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "services": "Leistungen",
+    "gallery": "Galerie",
+    "contact": "Kontakt",
+    "bookNow": "Termin buchen"
+  },
+  "homepage": {
+    "heroHeading": "Verwandle deine Schönheit",
+    "heroDescription": "Erlebe luxuriöse Schönheits­dienstleistungen in unserem Premium-Salon. Professionelles Hairstyling, revitalisierende Hautpflege und entspannende Spa-Behandlungen warten auf dich.",
+    "bookAppointment": "Termin vereinbaren",
+    "viewServices": "Leistungen ansehen",
+    "servicesTitle": "Unsere Premium-Leistungen",
+    "servicesSubtitle": "Entdecke unser umfassendes Angebot an Beauty- und Wellness­dienstleistungen zur Betonung deiner natürlichen Schönheit",
+    "hairTitle": "Hairstyling",
+    "hairDesc": "Professionelle Schnitte, Färbungen und Stylings für jeden Haartyp",
+    "skincareTitle": "Hautpflege",
+    "skincareDesc": "Verjüngende Gesichts- und Hautbehandlungen",
+    "nailTitle": "Nagelpflege",
+    "nailDesc": "Maniküre, Pediküre und Nail-Art von Experten",
+    "spaTitle": "Spa-Behandlungen",
+    "spaDesc": "Entspannende Massagen und Wellnessrituale"
+  },
+  "services": {
+    "pageTitle": "Unsere Premium-Leistungen",
+    "pageSubtitle": "Entdecke unser umfassendes Angebot an Beauty- und Wellness­dienstleistungen zur Betonung deiner natürlichen Schönheit",
+    "searchPlaceholder": "Dienstleistungen durchsuchen...",
+    "allServices": "Alle Leistungen",
+    "categoryHair": "Haare",
+    "categorySkincare": "Hautpflege",
+    "categoryNail": "Nagelpflege",
+    "categorySpa": "Spa"
+  },
+  "gallery": {
+    "pageTitle": "Unsere Galerie",
+    "pageSubtitle": "Entdecke unser Können durch beeindruckende Verwandlungen, das Salonambiente und Momente der Schönheit.",
+    "searchPlaceholder": "Nach Service oder Stylist suchen...",
+    "filterAll": "Alle Arbeiten",
+    "filterTransformations": "Vorher & Nachher",
+    "filterHair": "Hairstyling",
+    "filterSkincare": "Hautpflege",
+    "filterNails": "Nagelkunst",
+    "filterFacility": "Unser Salon"
+  },
+  "contact": {
+    "heroHeading": "Kontaktiere uns",
+    "heroDescription": "Wir helfen dir, dein bestes Ich zu zeigen. Kontaktiere uns für Termine, Fragen oder mehr Informationen über unsere Leistungen.",
+    "callNow": "Jetzt anrufen",
+    "bookAppointment": "Termin buchen",
+    "phoneTitle": "Ruf uns an",
+    "visitTitle": "Besuche uns",
+    "emailTitle": "Schreib uns",
+    "findLocation": "Finde unseren Standort",
+    "getDirections": "Route",
+    "parkingInfo": "Parkinformationen",
+    "businessHours": "Öffnungszeiten"
+  },
+  "loader": {
+    "welcome": "Willkommen im Beauty Salon",
+    "redirect": "Weiterleitung zur Startseite..."
+  }
+}
