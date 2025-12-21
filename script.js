@@ -94,6 +94,26 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
+// === MAGNETIC BUTTON EFFECT ===
+const magneticButtons = document.querySelectorAll('.button');
+
+magneticButtons.forEach(button => {
+    button.addEventListener('mousemove', function (e) {
+        const rect = button.getBoundingClientRect();
+        const buttonCenterX = rect.left + rect.width / 2;
+        const buttonCenterY = rect.top + rect.height / 2;
+
+        const deltaX = (e.clientX - buttonCenterX) * 0.3;
+        const deltaY = (e.clientY - buttonCenterY) * 0.3;
+
+        button.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.05)`;
+    });
+
+    button.addEventListener('mouseleave', function () {
+        button.style.transform = 'translate(0, 0) scale(1)';
+    });
+});
+
 // === FORM HANDLING WITH EMAILJS ===
 const contactForm = document.querySelector('#contact form');
 
@@ -258,15 +278,140 @@ window.addEventListener('load', () => {
     console.log('🎉 Page loaded successfully');
 });
 
-// === GALLERY IMAGE CLICK TRACKING ===
-document.querySelectorAll('.gallery img').forEach(img => {
-    img.addEventListener('click', function () {
-        trackEvent('gallery_image_click', {
-            image_alt: this.alt,
-            image_src: this.src
+// === CAROUSEL FUNCTIONALITY ===
+const carousel = {
+    track: document.querySelector('.carousel-track'),
+    slides: document.querySelectorAll('.carousel-slide'),
+    prevBtn: document.querySelector('.carousel-btn-prev'),
+    nextBtn: document.querySelector('.carousel-btn-next'),
+    dots: document.querySelectorAll('.pagination-dot'),
+    currentIndex: 0,
+    autoPlayInterval: null,
+    autoPlayDelay: 5000,
+
+    init() {
+        if (!this.track || !this.slides.length) return;
+
+        // Set up event listeners
+        this.prevBtn?.addEventListener('click', () => this.prev());
+        this.nextBtn?.addEventListener('click', () => this.next());
+
+        // Pagination dots
+        this.dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => this.goToSlide(index));
         });
-    });
-});
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') this.prev();
+            if (e.key === 'ArrowRight') this.next();
+        });
+
+        // Touch/swipe support
+        this.addTouchSupport();
+
+        // Auto-play
+        this.startAutoPlay();
+
+        // Pause on hover
+        const carouselContainer = document.querySelector('.carousel-container');
+        if (carouselContainer) {
+            carouselContainer.addEventListener('mouseenter', () => this.stopAutoPlay());
+            carouselContainer.addEventListener('mouseleave', () => this.startAutoPlay());
+        }
+
+        // Track carousel interactions
+        this.prevBtn?.addEventListener('click', () => {
+            trackEvent('carousel_navigation', { direction: 'previous' });
+        });
+        this.nextBtn?.addEventListener('click', () => {
+            trackEvent('carousel_navigation', { direction: 'next' });
+        });
+    },
+
+    goToSlide(index) {
+        // Remove active class from current slide and dot
+        this.slides[this.currentIndex]?.classList.remove('active');
+        this.dots[this.currentIndex]?.classList.remove('active');
+
+        // Update index
+        this.currentIndex = index;
+
+        // Add active class to new slide and dot
+        this.slides[this.currentIndex]?.classList.add('active');
+        this.dots[this.currentIndex]?.classList.add('active');
+
+        // Move track
+        const offset = -this.currentIndex * 100;
+        this.track.style.transform = `translateX(${offset}%)`;
+
+        // Track slide view
+        trackEvent('carousel_slide_view', {
+            slide_index: this.currentIndex,
+            slide_alt: this.slides[this.currentIndex]?.querySelector('img')?.alt
+        });
+    },
+
+    next() {
+        const nextIndex = (this.currentIndex + 1) % this.slides.length;
+        this.goToSlide(nextIndex);
+    },
+
+    prev() {
+        const prevIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+        this.goToSlide(prevIndex);
+    },
+
+    startAutoPlay() {
+        this.stopAutoPlay(); // Clear any existing interval
+        this.autoPlayInterval = setInterval(() => this.next(), this.autoPlayDelay);
+    },
+
+    stopAutoPlay() {
+        if (this.autoPlayInterval) {
+            clearInterval(this.autoPlayInterval);
+            this.autoPlayInterval = null;
+        }
+    },
+
+    addTouchSupport() {
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        this.track.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        this.track.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            this.handleSwipe(touchStartX, touchEndX);
+        }, { passive: true });
+    },
+
+    handleSwipe(startX, endX) {
+        const swipeThreshold = 50;
+        const diff = startX - endX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe left - next slide
+                this.next();
+                trackEvent('carousel_swipe', { direction: 'left' });
+            } else {
+                // Swipe right - previous slide
+                this.prev();
+                trackEvent('carousel_swipe', { direction: 'right' });
+            }
+        }
+    }
+};
+
+// Initialize carousel when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => carousel.init());
+} else {
+    carousel.init();
+}
 
 // === CONSOLE WELCOME MESSAGE ===
 console.log('%c🌟 Viva Beauty Fulda', 'font-size: 20px; font-weight: bold; color: #667eea;');

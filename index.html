@@ -28,7 +28,7 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="index.html"><img src="image/3.png" alt="Салон Красоты"></a>
+                <a href="index.html"><img src="image/3.png" alt="Viva Beauty Fulda Logo"></a>
             </div>
             <p><a href="index.html" class="logo-link">Viva Beauty Fulda</a></p>
             <ul>
@@ -59,10 +59,38 @@
 
     <section id="portfolio" class="fade-in">
         <h2>Unsere Arbeiten</h2>
-        <div class="gallery">
-            <img src="image/portfolio-1.png" alt="Elegante Maniküre mit goldenem Design" class="scale-in">
-            <img src="image/portfolio-2.png" alt="Professionelles Haarstyling" class="scale-in">
-            <img src="image/portfolio-3.png" alt="Kosmetische Behandlungen" class="scale-in">
+        <div class="carousel-container">
+            <div class="carousel-wrapper">
+                <div class="carousel-track">
+                    <div class="carousel-slide active">
+                        <img src="image/portfolio-1.png" alt="Elegante Maniküre mit goldenem Design">
+                        <div class="slide-caption">Elegante Maniküre mit goldenem Design</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="image/portfolio-2.png" alt="Professionelles Haarstyling">
+                        <div class="slide-caption">Professionelles Haarstyling</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="image/portfolio-3.png" alt="Kosmetische Behandlungen">
+                        <div class="slide-caption">Kosmetische Behandlungen</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <button class="carousel-btn carousel-btn-prev" aria-label="Vorheriges Bild">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn carousel-btn-next" aria-label="Nächstes Bild">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <!-- Pagination Dots -->
+            <div class="carousel-pagination">
+                <span class="pagination-dot active" data-slide="0"></span>
+                <span class="pagination-dot" data-slide="1"></span>
+                <span class="pagination-dot" data-slide="2"></span>
+            </div>
         </div>
     </section>
 
@@ -73,7 +101,9 @@
         <p><strong>Öffnungszeiten:</strong> Mo-Fr: 9:00-20:00, Sa-So: 10:00-18:00</p>
 
         <h3>Schreiben Sie uns</h3>
+
         <form>
+
             <label for="name">Ihr Name:</label>
             <input type="text" id="name" name="user_name" required>
 
