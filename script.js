@@ -81,14 +81,23 @@ document.querySelectorAll('.fade-in, .scale-in').forEach(el => {
 // === HEADER SCROLL EFFECT ===
 let lastScroll = 0;
 const header = document.querySelector('header');
+const scrollIndicator = document.querySelector('.scroll-indicator');
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
 
     if (currentScroll > 100) {
         header.classList.add('scrolled');
+        // Hide scroll indicator when scrolling
+        if (scrollIndicator) {
+            scrollIndicator.classList.add('hidden');
+        }
     } else {
         header.classList.remove('scrolled');
+        // Show scroll indicator at top
+        if (scrollIndicator) {
+            scrollIndicator.classList.remove('hidden');
+        }
     }
 
     lastScroll = currentScroll;
@@ -113,6 +122,72 @@ magneticButtons.forEach(button => {
         button.style.transform = 'translate(0, 0) scale(1)';
     });
 });
+
+// === 3D TILT EFFECT FOR HERO ===
+const heroSection = document.querySelector('#hero[data-tilt]');
+
+if (heroSection) {
+    heroSection.addEventListener('mousemove', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -5; // Max 5 degrees
+        const rotateY = ((x - centerX) / centerX) * 5;
+
+        heroSection.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    heroSection.addEventListener('mouseleave', () => {
+        heroSection.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    });
+}
+
+// === TYPING EFFECT FOR HERO SUBTITLE ===
+const subtitle = document.getElementById('hero-subtitle');
+
+if (subtitle) {
+    const text = subtitle.getAttribute('data-text');
+    subtitle.textContent = '';
+    subtitle.classList.add('typing');
+
+    let charIndex = 0;
+
+    function typeCharacter() {
+        if (charIndex < text.length) {
+            subtitle.textContent += text.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeCharacter, 50); // 50ms per character
+        } else {
+            // Keep cursor blinking for 2 more seconds, then remove
+            setTimeout(() => {
+                subtitle.classList.remove('typing');
+            }, 2000);
+        }
+    }
+
+    // Start typing after 1 second delay
+    setTimeout(typeCharacter, 1000);
+}
+
+// === VIDEO BACKGROUND HANDLING ===
+const heroVideo = document.getElementById('hero-video');
+
+if (heroVideo) {
+    // Handle video load errors gracefully
+    heroVideo.addEventListener('error', () => {
+        console.log('Video background not available, using fallback image');
+        heroVideo.style.display = 'none';
+    });
+
+    // Ensure video plays (some browsers block autoplay)
+    heroVideo.play().catch(() => {
+        console.log('Autoplay blocked, video will not play');
+    });
+}
 
 // === FORM HANDLING WITH EMAILJS ===
 const contactForm = document.querySelector('#contact form');

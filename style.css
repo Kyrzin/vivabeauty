@@ -353,6 +353,41 @@ nav ul li a:hover::after {
     /* Parallax effect */
     color: var(--white);
     overflow: hidden;
+    /* 3D Tilt Effect */
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+    will-change: transform;
+}
+
+/* Video Background */
+#hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: -2;
+    opacity: 0.9;
+    animation: kenBurns 30s ease-in-out infinite alternate;
+}
+
+/* Ken Burns Effect - Slow Zoom and Pan */
+@keyframes kenBurns {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(-52%, -48%) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-48%, -52%) scale(1.05);
+    }
 }
 
 /* Animated Background Overlay */
@@ -496,6 +531,108 @@ nav ul li a:hover::after {
 
     50% {
         transform: translate(30px, -30px);
+    }
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 10;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.scroll-indicator.hidden {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+    pointer-events: none;
+}
+
+.scroll-mouse {
+    width: 28px;
+    height: 45px;
+    border: 3px solid var(--champagne-gold);
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+.scroll-wheel {
+    width: 4px;
+    height: 10px;
+    background: var(--classic-gold);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll-wheel 2s ease-in-out infinite;
+}
+
+@keyframes scroll-wheel {
+
+    0%,
+    100% {
+        top: 8px;
+        opacity: 1;
+    }
+
+    50% {
+        top: 20px;
+        opacity: 0.3;
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-15px);
+    }
+}
+
+.scroll-indicator span {
+    font-size: 0.85rem;
+    color: var(--champagne-gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+/* Typing Cursor Effect */
+#hero-subtitle.typing::after {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 1.2em;
+    background: var(--classic-gold);
+    margin-left: 4px;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+}
+
+@keyframes blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
     }
 }
 
