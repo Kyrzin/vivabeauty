@@ -473,34 +473,30 @@ window.addEventListener('load', () => {
     carousel.init();
 });
 
-// === SPARKLE/SHIMMER EFFECT - Beauty Salon Theme ===
+// === GOLD DUST / FIREFLIES EFFECT ===
 const particlesEffect = {
     canvas: null,
     ctx: null,
     particles: [],
     animationId: null,
     isActive: true,
+    mouse: { x: null, y: null, radius: 100 },
 
-    // Configuration for beauty salon aesthetics
+    // Configuration
     config: {
-        particleCount: 60,
-        // Elegant color palette: rose gold, champagne, soft pink, white sparkle
+        particleCount: 70, // Number of particles
         colors: [
-            { r: 212, g: 175, b: 55 },   // Classic gold
-            { r: 255, g: 215, b: 180 },  // Rose gold / peach
-            { r: 255, g: 182, b: 193 },  // Light pink
-            { r: 255, g: 240, b: 245 },  // Lavender blush
-            { r: 255, g: 255, b: 255 },  // Pure white sparkle
-            { r: 244, g: 228, b: 193 },  // Champagne
+            { r: 212, g: 175, b: 55 },   // Classic Gold
+            { r: 255, g: 215, b: 0 },    // Bright Gold
+            { r: 255, g: 223, b: 186 },  // Pale Gold
+            { r: 244, g: 228, b: 193 }   // Champagne
         ],
-        minSize: 2,
-        maxSize: 6,
-        minSpeed: 0.3,
-        maxSpeed: 1.2,
-        // Sparkle shapes: 'circle', 'star', 'diamond'
-        shapes: ['circle', 'star', 'diamond', 'circle', 'star'],
-        twinkleSpeed: 0.03,
-        swayAmount: 0.5,
+        minRadius: 1,
+        maxRadius: 3,
+        minSpeed: 0.1,
+        maxSpeed: 0.4, // Slow movement
+        glowStrength: 10,
+        mouseRepelForce: 2, // Slight push
     },
 
     init() {
@@ -513,13 +509,12 @@ const particlesEffect = {
         this.addEventListeners();
         this.animate();
 
-        console.log('✨ Sparkle effect initialized');
+        console.log('✨ Gold Dust effect initialized');
     },
 
     resize() {
         const heroSection = document.getElementById('hero');
         if (!heroSection) return;
-
         this.canvas.width = heroSection.offsetWidth;
         this.canvas.height = heroSection.offsetHeight;
     },
@@ -529,7 +524,7 @@ const particlesEffect = {
         const count = this.getParticleCount();
 
         for (let i = 0; i < count; i++) {
-            this.particles.push(this.createParticle(true));
+            this.particles.push(this.createParticle());
         }
     },
 
@@ -540,24 +535,24 @@ const particlesEffect = {
         return this.config.particleCount;
     },
 
-    createParticle(randomY = false) {
-        const colors = this.config.colors;
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const shapes = this.config.shapes;
+    createParticle() {
+        const color = this.config.colors[Math.floor(Math.random() * this.config.colors.length)];
 
         return {
             x: Math.random() * this.canvas.width,
-            y: randomY ? Math.random() * this.canvas.height : -20,
-            size: Math.random() * (this.config.maxSize - this.config.minSize) + this.config.minSize,
-            speedY: Math.random() * (this.config.maxSpeed - this.config.minSpeed) + this.config.minSpeed,
-            speedX: (Math.random() - 0.5) * this.config.swayAmount,
+            y: Math.random() * this.canvas.height,
+            radius: Math.random() * (this.config.maxRadius - this.config.minRadius) + this.config.minRadius,
             color: color,
-            opacity: Math.random() * 0.5 + 0.5,
-            twinkle: Math.random() * Math.PI * 2,
-            rotation: Math.random() * Math.PI * 2,
-            rotationSpeed: (Math.random() - 0.5) * 0.02,
-            shape: shapes[Math.floor(Math.random() * shapes.length)],
-            swayPhase: Math.random() * Math.PI * 2,
+            // Random direction
+            vx: (Math.random() - 0.5) * this.config.maxSpeed,
+            vy: (Math.random() - 0.5) * this.config.maxSpeed,
+            // Floating properties
+            angle: Math.random() * Math.PI * 2,
+            angleSpeed: (Math.random() - 0.5) * 0.02,
+            // Opacity animation (fading in/out)
+            alpha: Math.random() * 0.5 + 0.1,
+            alphaSpeed: Math.random() * 0.005 + 0.002,
+            targetAlpha: Math.random() * 0.6 + 0.2,
         };
     },
 
@@ -567,156 +562,90 @@ const particlesEffect = {
             this.createParticles();
         });
 
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                this.pause();
-            } else {
-                this.resume();
-            }
-        });
+        const hero = document.getElementById('hero');
+        if (hero) {
+            hero.addEventListener('mousemove', (e) => {
+                const rect = hero.getBoundingClientRect();
+                this.mouse.x = e.clientX - rect.left;
+                this.mouse.y = e.clientY - rect.top;
+            });
 
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    const heroSection = document.getElementById('hero');
-                    if (heroSection) {
-                        const rect = heroSection.getBoundingClientRect();
-                        if (rect.bottom < 0 || rect.top > window.innerHeight) {
-                            this.pause();
-                        } else {
-                            this.resume();
-                        }
-                    }
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
+            hero.addEventListener('mouseleave', () => {
+                this.mouse.x = null;
+                this.mouse.y = null;
+            });
+        }
     },
 
     animate() {
         if (!this.isActive) return;
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.updateParticles();
         this.drawParticles();
-
         this.animationId = requestAnimationFrame(() => this.animate());
     },
 
     updateParticles() {
-        for (let i = this.particles.length - 1; i >= 0; i--) {
-            const p = this.particles[i];
+        for (let p of this.particles) {
+            // Natural floating movement using sine waves
+            p.angle += p.angleSpeed;
+            p.x += Math.cos(p.angle) * 0.3 + p.vx;
+            p.y += Math.sin(p.angle) * 0.3 + p.vy;
 
-            // Gentle falling with swaying motion
-            p.y += p.speedY;
-            p.swayPhase += 0.02;
-            p.x += Math.sin(p.swayPhase) * p.speedX;
+            // Opacity blinking (firefly effect)
+            p.alpha += p.alphaSpeed;
+            if (p.alpha > p.targetAlpha || p.alpha < 0.1) {
+                p.alphaSpeed *= -1; // Reverse fading direction
+            }
+            // Clamp alpha
+            p.alpha = Math.max(0, Math.min(1, p.alpha));
 
-            // Rotation
-            p.rotation += p.rotationSpeed;
+            // Mouse Interaction (Repel)
+            if (this.mouse.x !== null) {
+                const dx = p.x - this.mouse.x;
+                const dy = p.y - this.mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
 
-            // Twinkle effect
-            p.twinkle += this.config.twinkleSpeed;
-            p.opacity = 0.4 + Math.sin(p.twinkle) * 0.4;
-
-            // Reset particle when it goes off screen
-            if (p.y > this.canvas.height + 20) {
-                this.particles[i] = this.createParticle(false);
+                if (dist < this.mouse.radius) {
+                    const angle = Math.atan2(dy, dx);
+                    const force = (this.mouse.radius - dist) / this.mouse.radius;
+                    // Move away gently
+                    p.x += Math.cos(angle) * force * this.config.mouseRepelForce;
+                    p.y += Math.sin(angle) * force * this.config.mouseRepelForce;
+                }
             }
 
-            // Wrap horizontally
-            if (p.x < -20) p.x = this.canvas.width + 20;
-            if (p.x > this.canvas.width + 20) p.x = -20;
+            // Screen wrapping (infinite loop)
+            if (p.x < -10) p.x = this.canvas.width + 10;
+            if (p.x > this.canvas.width + 10) p.x = -10;
+            if (p.y < -10) p.y = this.canvas.height + 10;
+            if (p.y > this.canvas.height + 10) p.y = -10;
         }
     },
 
     drawParticles() {
         for (let p of this.particles) {
             this.ctx.save();
-            this.ctx.translate(p.x, p.y);
-            this.ctx.rotate(p.rotation);
-            this.ctx.globalAlpha = p.opacity;
 
-            // Glow effect
-            const glowSize = p.size * 3;
-            const gradient = this.ctx.createRadialGradient(0, 0, 0, 0, 0, glowSize);
-            gradient.addColorStop(0, `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0.8)`);
-            gradient.addColorStop(0.5, `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0.2)`);
-            gradient.addColorStop(1, 'transparent');
+            // Draw Glow
+            this.ctx.shadowBlur = this.config.glowStrength;
+            this.ctx.shadowColor = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.alpha})`;
 
+            // Draw Core
             this.ctx.beginPath();
-            this.ctx.arc(0, 0, glowSize, 0, Math.PI * 2);
-            this.ctx.fillStyle = gradient;
+            this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            this.ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.alpha})`;
             this.ctx.fill();
-
-            // Draw shape
-            this.ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 1)`;
-
-            switch (p.shape) {
-                case 'star':
-                    this.drawStar(0, 0, p.size, p.size * 0.5, 4);
-                    break;
-                case 'diamond':
-                    this.drawDiamond(0, 0, p.size);
-                    break;
-                default:
-                    this.ctx.beginPath();
-                    this.ctx.arc(0, 0, p.size * 0.5, 0, Math.PI * 2);
-                    this.ctx.fill();
-            }
 
             this.ctx.restore();
         }
     },
 
-    drawStar(cx, cy, outerRadius, innerRadius, points) {
-        this.ctx.beginPath();
-        for (let i = 0; i < points * 2; i++) {
-            const radius = i % 2 === 0 ? outerRadius : innerRadius;
-            const angle = (i * Math.PI) / points - Math.PI / 2;
-            const x = cx + Math.cos(angle) * radius;
-            const y = cy + Math.sin(angle) * radius;
-            if (i === 0) {
-                this.ctx.moveTo(x, y);
-            } else {
-                this.ctx.lineTo(x, y);
-            }
-        }
-        this.ctx.closePath();
-        this.ctx.fill();
-    },
-
-    drawDiamond(cx, cy, size) {
-        this.ctx.beginPath();
-        this.ctx.moveTo(cx, cy - size);
-        this.ctx.lineTo(cx + size * 0.6, cy);
-        this.ctx.lineTo(cx, cy + size);
-        this.ctx.lineTo(cx - size * 0.6, cy);
-        this.ctx.closePath();
-        this.ctx.fill();
-    },
-
-    pause() {
-        this.isActive = false;
-        if (this.animationId) {
-            cancelAnimationFrame(this.animationId);
-            this.animationId = null;
-        }
-    },
-
-    resume() {
-        if (!this.isActive) {
-            this.isActive = true;
-            this.animate();
-        }
-    },
-
     destroy() {
-        this.pause();
+        if (this.animationId) cancelAnimationFrame(this.animationId);
         this.particles = [];
+        this.isActive = false;
     }
 };
 
