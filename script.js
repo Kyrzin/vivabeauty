@@ -81,23 +81,14 @@ document.querySelectorAll('.fade-in, .scale-in').forEach(el => {
 // === HEADER SCROLL EFFECT ===
 let lastScroll = 0;
 const header = document.querySelector('header');
-const scrollIndicator = document.querySelector('.scroll-indicator');
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
 
     if (currentScroll > 100) {
         header.classList.add('scrolled');
-        // Hide scroll indicator when scrolling
-        if (scrollIndicator) {
-            scrollIndicator.classList.add('hidden');
-        }
     } else {
         header.classList.remove('scrolled');
-        // Show scroll indicator at top
-        if (scrollIndicator) {
-            scrollIndicator.classList.remove('hidden');
-        }
     }
 
     lastScroll = currentScroll;
@@ -171,22 +162,6 @@ if (subtitle) {
 
     // Start typing after 1 second delay
     setTimeout(typeCharacter, 1000);
-}
-
-// === VIDEO BACKGROUND HANDLING ===
-const heroVideo = document.getElementById('hero-video');
-
-if (heroVideo) {
-    // Handle video load errors gracefully
-    heroVideo.addEventListener('error', () => {
-        console.log('Video background not available, using fallback image');
-        heroVideo.style.display = 'none';
-    });
-
-    // Ensure video plays (some browsers block autoplay)
-    heroVideo.play().catch(() => {
-        console.log('Autoplay blocked, video will not play');
-    });
 }
 
 // === FORM HANDLING WITH EMAILJS ===
@@ -355,17 +330,29 @@ window.addEventListener('load', () => {
 
 // === CAROUSEL FUNCTIONALITY ===
 const carousel = {
-    track: document.querySelector('.carousel-track'),
-    slides: document.querySelectorAll('.carousel-slide'),
-    prevBtn: document.querySelector('.carousel-btn-prev'),
-    nextBtn: document.querySelector('.carousel-btn-next'),
-    dots: document.querySelectorAll('.pagination-dot'),
+    track: null,
+    slides: null,
+    prevBtn: null,
+    nextBtn: null,
+    dots: null,
     currentIndex: 0,
     autoPlayInterval: null,
     autoPlayDelay: 5000,
 
     init() {
-        if (!this.track || !this.slides.length) return;
+        // Get DOM elements
+        this.track = document.querySelector('.carousel-track');
+        this.slides = document.querySelectorAll('.carousel-slide');
+        this.prevBtn = document.querySelector('.carousel-btn-prev');
+        this.nextBtn = document.querySelector('.carousel-btn-next');
+        this.dots = document.querySelectorAll('.pagination-dot');
+
+        if (!this.track || !this.slides.length) {
+            console.log('⚠️ Carousel elements not found');
+            return;
+        }
+
+        console.log('🎠 Carousel initialized with', this.slides.length, 'slides');
 
         // Set up event listeners
         this.prevBtn?.addEventListener('click', () => this.prev());
@@ -481,12 +468,262 @@ const carousel = {
     }
 };
 
-// Initialize carousel when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => carousel.init());
-} else {
+// Initialize carousel when page is fully loaded
+window.addEventListener('load', () => {
     carousel.init();
-}
+});
+
+// === SPARKLE/SHIMMER EFFECT - Beauty Salon Theme ===
+const particlesEffect = {
+    canvas: null,
+    ctx: null,
+    particles: [],
+    animationId: null,
+    isActive: true,
+
+    // Configuration for beauty salon aesthetics
+    config: {
+        particleCount: 60,
+        // Elegant color palette: rose gold, champagne, soft pink, white sparkle
+        colors: [
+            { r: 212, g: 175, b: 55 },   // Classic gold
+            { r: 255, g: 215, b: 180 },  // Rose gold / peach
+            { r: 255, g: 182, b: 193 },  // Light pink
+            { r: 255, g: 240, b: 245 },  // Lavender blush
+            { r: 255, g: 255, b: 255 },  // Pure white sparkle
+            { r: 244, g: 228, b: 193 },  // Champagne
+        ],
+        minSize: 2,
+        maxSize: 6,
+        minSpeed: 0.3,
+        maxSpeed: 1.2,
+        // Sparkle shapes: 'circle', 'star', 'diamond'
+        shapes: ['circle', 'star', 'diamond', 'circle', 'star'],
+        twinkleSpeed: 0.03,
+        swayAmount: 0.5,
+    },
+
+    init() {
+        this.canvas = document.getElementById('particles-canvas');
+        if (!this.canvas) return;
+
+        this.ctx = this.canvas.getContext('2d');
+        this.resize();
+        this.createParticles();
+        this.addEventListeners();
+        this.animate();
+
+        console.log('✨ Sparkle effect initialized');
+    },
+
+    resize() {
+        const heroSection = document.getElementById('hero');
+        if (!heroSection) return;
+
+        this.canvas.width = heroSection.offsetWidth;
+        this.canvas.height = heroSection.offsetHeight;
+    },
+
+    createParticles() {
+        this.particles = [];
+        const count = this.getParticleCount();
+
+        for (let i = 0; i < count; i++) {
+            this.particles.push(this.createParticle(true));
+        }
+    },
+
+    getParticleCount() {
+        const width = this.canvas.width;
+        if (width < 768) return Math.floor(this.config.particleCount * 0.5);
+        if (width < 1200) return Math.floor(this.config.particleCount * 0.75);
+        return this.config.particleCount;
+    },
+
+    createParticle(randomY = false) {
+        const colors = this.config.colors;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const shapes = this.config.shapes;
+
+        return {
+            x: Math.random() * this.canvas.width,
+            y: randomY ? Math.random() * this.canvas.height : -20,
+            size: Math.random() * (this.config.maxSize - this.config.minSize) + this.config.minSize,
+            speedY: Math.random() * (this.config.maxSpeed - this.config.minSpeed) + this.config.minSpeed,
+            speedX: (Math.random() - 0.5) * this.config.swayAmount,
+            color: color,
+            opacity: Math.random() * 0.5 + 0.5,
+            twinkle: Math.random() * Math.PI * 2,
+            rotation: Math.random() * Math.PI * 2,
+            rotationSpeed: (Math.random() - 0.5) * 0.02,
+            shape: shapes[Math.floor(Math.random() * shapes.length)],
+            swayPhase: Math.random() * Math.PI * 2,
+        };
+    },
+
+    addEventListeners() {
+        window.addEventListener('resize', () => {
+            this.resize();
+            this.createParticles();
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                this.pause();
+            } else {
+                this.resume();
+            }
+        });
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const heroSection = document.getElementById('hero');
+                    if (heroSection) {
+                        const rect = heroSection.getBoundingClientRect();
+                        if (rect.bottom < 0 || rect.top > window.innerHeight) {
+                            this.pause();
+                        } else {
+                            this.resume();
+                        }
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    },
+
+    animate() {
+        if (!this.isActive) return;
+
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.updateParticles();
+        this.drawParticles();
+
+        this.animationId = requestAnimationFrame(() => this.animate());
+    },
+
+    updateParticles() {
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+            const p = this.particles[i];
+
+            // Gentle falling with swaying motion
+            p.y += p.speedY;
+            p.swayPhase += 0.02;
+            p.x += Math.sin(p.swayPhase) * p.speedX;
+
+            // Rotation
+            p.rotation += p.rotationSpeed;
+
+            // Twinkle effect
+            p.twinkle += this.config.twinkleSpeed;
+            p.opacity = 0.4 + Math.sin(p.twinkle) * 0.4;
+
+            // Reset particle when it goes off screen
+            if (p.y > this.canvas.height + 20) {
+                this.particles[i] = this.createParticle(false);
+            }
+
+            // Wrap horizontally
+            if (p.x < -20) p.x = this.canvas.width + 20;
+            if (p.x > this.canvas.width + 20) p.x = -20;
+        }
+    },
+
+    drawParticles() {
+        for (let p of this.particles) {
+            this.ctx.save();
+            this.ctx.translate(p.x, p.y);
+            this.ctx.rotate(p.rotation);
+            this.ctx.globalAlpha = p.opacity;
+
+            // Glow effect
+            const glowSize = p.size * 3;
+            const gradient = this.ctx.createRadialGradient(0, 0, 0, 0, 0, glowSize);
+            gradient.addColorStop(0, `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0.8)`);
+            gradient.addColorStop(0.5, `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0.2)`);
+            gradient.addColorStop(1, 'transparent');
+
+            this.ctx.beginPath();
+            this.ctx.arc(0, 0, glowSize, 0, Math.PI * 2);
+            this.ctx.fillStyle = gradient;
+            this.ctx.fill();
+
+            // Draw shape
+            this.ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 1)`;
+
+            switch (p.shape) {
+                case 'star':
+                    this.drawStar(0, 0, p.size, p.size * 0.5, 4);
+                    break;
+                case 'diamond':
+                    this.drawDiamond(0, 0, p.size);
+                    break;
+                default:
+                    this.ctx.beginPath();
+                    this.ctx.arc(0, 0, p.size * 0.5, 0, Math.PI * 2);
+                    this.ctx.fill();
+            }
+
+            this.ctx.restore();
+        }
+    },
+
+    drawStar(cx, cy, outerRadius, innerRadius, points) {
+        this.ctx.beginPath();
+        for (let i = 0; i < points * 2; i++) {
+            const radius = i % 2 === 0 ? outerRadius : innerRadius;
+            const angle = (i * Math.PI) / points - Math.PI / 2;
+            const x = cx + Math.cos(angle) * radius;
+            const y = cy + Math.sin(angle) * radius;
+            if (i === 0) {
+                this.ctx.moveTo(x, y);
+            } else {
+                this.ctx.lineTo(x, y);
+            }
+        }
+        this.ctx.closePath();
+        this.ctx.fill();
+    },
+
+    drawDiamond(cx, cy, size) {
+        this.ctx.beginPath();
+        this.ctx.moveTo(cx, cy - size);
+        this.ctx.lineTo(cx + size * 0.6, cy);
+        this.ctx.lineTo(cx, cy + size);
+        this.ctx.lineTo(cx - size * 0.6, cy);
+        this.ctx.closePath();
+        this.ctx.fill();
+    },
+
+    pause() {
+        this.isActive = false;
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
+        }
+    },
+
+    resume() {
+        if (!this.isActive) {
+            this.isActive = true;
+            this.animate();
+        }
+    },
+
+    destroy() {
+        this.pause();
+        this.particles = [];
+    }
+};
+
+// Initialize particles when page is fully loaded
+window.addEventListener('load', () => {
+    particlesEffect.init();
+});
 
 // === CONSOLE WELCOME MESSAGE ===
 console.log('%c🌟 Viva Beauty Fulda', 'font-size: 20px; font-weight: bold; color: #667eea;');
